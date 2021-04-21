@@ -1,4 +1,4 @@
-package io.msa.movieratingservice.model;
+package io.msa.moviecatalogservice.model;
 
 import lombok.Data;
 
