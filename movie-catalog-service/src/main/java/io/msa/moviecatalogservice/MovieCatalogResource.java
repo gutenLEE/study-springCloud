@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,22 +23,22 @@ public class MovieCatalogResource {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+/*    @Autowired
+    private WebClient.Builder webClientBuilder;*/
 
     @RequestMapping("/{userId}")
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
         //RestTemplate restTemplate = new RestTemplate(); // every call, a new resTemplate created...bad
 
-        WebClient.Builder builder = WebClient.builder();
+        //WebClient.Builder builder = WebClient.builder();
 
         // get all rated movie IDs
-        //List<Rating> ratings = restTemplate.getForObject("http://localhost:8083/ratingsdata/users/" + userId, Rating.class); second argument is the type you need to cast it. list of ratings
-        UserRating ratings = restTemplate.getForObject("http://localhost:8083/ratingsdata/users/" + userId, UserRating.class);
+
+        UserRating ratings = restTemplate.getForObject("http://movie-rating-service/ratingsdata/users/" + userId, UserRating.class);
 
         return ratings.getUserRating().stream().map(rating -> {
-            Movie movie = restTemplate.getForObject("http://localhost:8081/movies/" + rating.getMovieId(), Movie.class); //-> hard-coding url is bad.
+            Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class); //-> hard-coding url is bad.
             return new CatalogItem(movie.getName(), "Test", rating.getRating());
 
         }).collect(Collectors.toList());
