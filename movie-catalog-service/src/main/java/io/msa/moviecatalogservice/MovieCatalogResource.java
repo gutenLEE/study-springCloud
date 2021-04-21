@@ -44,7 +44,7 @@ public class MovieCatalogResource {
 
         return ratings.getUserRating().stream().map(rating -> {
             Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class); //-> hard-coding url is bad.
-            return new CatalogItem(movie.getName(), "Test", rating.getRating());
+            return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
 
         }).collect(Collectors.toList());
 

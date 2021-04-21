@@ -22,8 +22,8 @@ public class RatingResource {
     @RequestMapping("users/{userId}") // API endpoint
     public UserRating getUserRating(@PathVariable("userId") String userId) {
         List<Rating> ratings =  Arrays.asList(
-                new Rating("1234", 4),
-                new Rating("4567", 5)
+                new Rating("100", 4),
+                new Rating("200", 5)
         );
         UserRating userRating = new UserRating();
         userRating.setUserRating(ratings);
@@ -33,7 +33,7 @@ public class RatingResource {
         // don't recommend doing this way
         // why?
         /*
-            what's the route known afters JSON that you are going to get back
+            what's the route known afters JSON that you are gointg to get back
             it's a list. it's not an object.
 
             what's the problem with having any API return a list as the root node?
