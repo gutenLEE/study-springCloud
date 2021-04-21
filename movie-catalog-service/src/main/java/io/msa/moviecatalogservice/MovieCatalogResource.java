@@ -1,10 +1,12 @@
 package io.msa.moviecatalogservice;
 
+
 import io.msa.moviecatalogservice.model.CatalogItem;
 import io.msa.moviecatalogservice.model.Movie;
 import io.msa.moviecatalogservice.model.Rating;
 import io.msa.moviecatalogservice.model.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,9 @@ public class MovieCatalogResource {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
 /*    @Autowired
     private WebClient.Builder webClientBuilder;*/
